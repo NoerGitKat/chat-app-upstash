@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  chat-app-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - UPSTASH_REDIS_REST_URL=${UPSTASH_REDIS_REST_URL}
+      - PORT=3001
+      - CORS_ORIGIN=${CORS_ORIGIN}
+  chat-app-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - UPSTASH_REDIS_REST_URL=${UPSTASH_REDIS_REST_URL}
+      - PORT=4000
+      - CORS_ORIGIN=${CORS_ORIGIN}
+  chat-app-3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - UPSTASH_REDIS_REST_URL=${UPSTASH_REDIS_REST_URL}
+      - PORT=5000
+      - CORS_ORIGIN=${CORS_ORIGIN}
+  caddy:
+    image: arm64v8/caddy:2.7.4-alpine
+    container_name: my_caddy_server
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - my_caddy_data:/data
+      - my_caddy_config:/config
+
+volumes:
+  my_caddy_data:
+  my_caddy_config:
