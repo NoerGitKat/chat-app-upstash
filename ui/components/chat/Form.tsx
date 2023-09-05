@@ -1,4 +1,10 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  MutableRefObject,
+  SetStateAction,
+} from "react";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { Socket } from "socket.io-client";
@@ -32,7 +38,11 @@ function ChatForm({ socket, setNewMessage, textMessage }: ChatFormProps) {
         }
         maxLength={255}
       />
-      <Button disabled={textMessage.length === 0} className="h-full">
+      <Button
+        disabled={textMessage.length === 0}
+        className="h-full"
+        type="submit"
+      >
         Send message
       </Button>
     </form>

@@ -1,11 +1,11 @@
 "use client";
 
-import { ChatForm } from "@/components/chat";
+import { ChatForm, ChatMessages } from "@/components/chat";
 import { NEW_MESSAGE_CHANNEL } from "@/constants";
 import { useSocket } from "@/hooks";
 import { SocketMessage } from "@/types";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
   const { socket, messages, setMessages, setNewMessage, textMessage } =
@@ -25,13 +25,8 @@ export default function Home() {
 
   return (
     <main className="flex flex-col p-4 w-full max-w-3xl m-auto">
-      {messages.length > 0 && (
-        <ol>
-          {messages.map((msg) => (
-            <li key={msg.id}>{msg.message}</li>
-          ))}
-        </ol>
-      )}
+      <h1 className="text-4xl font-bold my-4">Chats</h1>
+      <ChatMessages messages={messages} />
       {socket && (
         <ChatForm
           socket={socket}
