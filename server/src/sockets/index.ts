@@ -4,7 +4,6 @@ import {
   CONNECTION_COUNT_KEY,
   CONNECTION_COUNT_UPDATED_CHANNEL,
   NEW_MESSAGE_CHANNEL,
-  ALL_MESSAGES_CHANNEL,
   PORT
 } from "../constants";
 import { randomUUID } from "crypto";
